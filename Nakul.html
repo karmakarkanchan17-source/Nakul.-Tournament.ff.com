@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FF Registration - WhatsApp Alert</title>
+    <style>
+        body { font-family: sans-serif; background-color: #0f0f0f; color: white; display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0; }
+        .container { background-color: #1a1a1a; padding: 30px; border-radius: 15px; box-shadow: 0px 0px 15px #25d366; width: 320px; border: 1px solid #333; }
+        h2 { text-align: center; color: #25d366; text-transform: uppercase; }
+        .input-group { margin-bottom: 15px; }
+        label { display: block; margin-bottom: 5px; font-size: 14px; }
+        input, select { width: 100%; padding: 10px; border-radius: 5px; border: 1px solid #444; background-color: #222; color: white; box-sizing: border-box; }
+        button { width: 100%; padding: 12px; background: #25d366; border: none; border-radius: 5px; color: black; font-weight: bold; cursor: pointer; transition: 0.3s; margin-top: 10px; }
+        button:hover { background: #128c7e; color: white; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2>FF Registration</h2>
+    <form id="regForm">
+        <div class="input-group">
+            <label>In-Game Name (IGN)</label>
+            <input type="text" id="ign" placeholder="Enter FF Name" required>
+        </div>
+        <div class="input-group">
+            <label>Player ID (UID)</label>
+            <input type="number" id="uid" placeholder="Enter UID" required>
+        </div>
+        <div class="input-group">
+            <label>Match Type</label>
+            <select id="matchType">
+                <option>Solo</option>
+                <option>Duo</option>
+                <option>Squad</option>
+            </select>
+        </div>
+        <button type="button" onclick="sendToWhatsApp()">REGISTER VIA WHATSAPP</button>
+    </form>
+</div>
+
+<script>
+    function sendToWhatsApp() {
+        // Aapka WhatsApp Number
+        let phoneNumber = "919641387943"; 
+
+        // Form se data nikalna
+        let ign = document.getElementById('ign').value;
+        let uid = document.getElementById('uid').value;
+        let matchType = document.getElementById('matchType').value;
+
+        if(ign == "" || uid == "") {
+            alert("Please fill all details!");
+            return;
+        }
+
+        // WhatsApp Message Format karna
+        let message = "*Naya Tournament Registration!*%0A%0A" + 
+                      "*Name:* " + ign + "%0A" + 
+                      "*UID:* " + uid + "%0A" + 
+                      "*Match:* " + matchType;
+
+        // WhatsApp Link banana aur redirect karna
+        let whatsappURL = "https://wa.me/" + phoneNumber + "?text=" + message;
+        
+        window.open(whatsappURL, '_blank').focus();
+    }
+</script>
+
+</body>
+</html>
